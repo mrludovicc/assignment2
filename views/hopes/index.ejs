@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+    <main>
+      <h2 class="subtitle is-2">Hopes</h2>
+      <a href="/dashboard">DASHBOARD</a>
+      <% for (hope of hopes) { %>
+
+        <a href="/hopes/<%= hope._id %>"><h3><%= hope.text %></h3></a>
+
+      <% } %>
+      <form action="/hopes/" method="post">
+        <input
+          class="input"
+          type="text"
+          name="text"
+          placeholder="new hope"
+        />
+        <input class="button" type="submit" value="create hope" />
+      </form>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("../partials/footer") %>
+  </body>
+</html>

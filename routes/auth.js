@@ -53,6 +53,7 @@ router.post("/login", async (req, res) => {
         res.redirect("/dashboard")
       } else {
         res.status(400).json({ error: "Password Does Not Match" });
+        
       }
     } else {
       res.status(400).json({ error: "User Does Not Exist" });

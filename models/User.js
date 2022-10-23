@@ -1,7 +1,9 @@
 const {model, Schema} = require("../db/connection")
 
 const Hope = new Schema({
-    text: String
+    text: String,
+    number:Number,
+    email:String,
 })
 
 const UserSchema = new Schema({

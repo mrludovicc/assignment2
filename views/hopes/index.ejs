@@ -9,21 +9,59 @@
     <main>
       <h2 class="subtitle is-2">Hopes</h2>
       <a href="/dashboard">DASHBOARD</a>
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Number</th>
+          <th scope="col">Email Address</th>
+       
+        </tr>
+      </thead>
+      <tbody>
+        <p>want to edit list just click name then you can edit </p>
       <% for (hope of hopes) { %>
-
-        <a href="/hopes/<%= hope._id %>"><h3><%= hope.text %></h3></a>
+ 
+            <tr>
+              <td scope="row"> <a href="/hopes/<%= hope._id %>"><h3><%= hope.text %></h3></a></td>
+              <td><%= hope.email %></td>
+              <td><%= hope.number %></td>
+         
+            </tr>
+           
+        
+        
+       
 
       <% } %>
-      <form action="/hopes/" method="post">
+    </tbody>
+  </table>
+
+   <h1>Add Here Your Business contactlist such as Name,Email,Number</h1>
+      <form  name="myForm" action="/hopes/" method="post">
         <input
           class="input"
           type="text"
           name="text"
-          placeholder="new hope"
+          placeholder="Contact Name"
         />
-        <input class="button" type="submit" value="create hope" />
+        <input
+        class="input"
+        type="number"
+        name="number"
+        placeholder="Number"
+      />
+      <input
+        class="input"
+        type="email"
+        name="email"
+        placeholder="Email"
+      />
+        <input class="button" type="submit" value="Submit" />
+        <a class="button" href="/">Cancel</a>
       </form>
     </main>
+    
     <!-- THE HEAD TAG PARTIAL -->
     <%- include("../partials/footer") %>
   </body>

@@ -20,16 +20,20 @@ router.use(async (req, res, next) => {
 router.get("/", async (req, res) => {
   const user = req.user;
   const hopes = user.hopes;
+  console.log(hopes);
   res.render("hopes/index", {
     hopes,
   });
 });
 
 router.post("/", async (req, res) => {
+  
   const user = req.user;
   user.hopes.push(req.body);
   user.save();
-  res.redirect("/hopes/");
+  
+  res.redirect("/dashboard/")
+  
 });
 
 router.get("/:id", async (req, res) => {
@@ -46,6 +50,8 @@ router.put("/:id", async (req, res) => {
   const id = req.params.id;
   const index = req.user.hopes.findIndex((hope) => `${hope._id}` === id);
   req.user.hopes[index].text = req.body.text;
+  req.user.hopes[index].email = req.body.email;
+  req.user.hopes[index].number = req.body.number;
   req.user.save();
   res.redirect("/hopes");
 });

@@ -14,6 +14,11 @@ const cors = require("cors");
 const PORT = process.env.PORT || "2021";
 const SECRET = process.env.SECRET || "secret"
 const HomeRouter = require("./routes/home.js");
+const aboutRouter = require("./routes/abouroute.js");
+const projectRouter = require("./routes/projectRouter.js");
+const servicesRouter = require("./routes/servicesRouter.js");
+const contactRouter = require("./routes/contactRouter.js");
+const expressLayouts = require('express-ejs-layouts')
 // Sessions Middleware
 const session = require("express-session"); // create session cookies
 const connect = require("connect-mongodb-session")(session) // store cookies in mongo
@@ -27,8 +32,13 @@ const app = express();
 /////////////////////////////////////
 // Set the View Engine
 /////////////////////////////////////
-app.set("view engine", "ejs");
+// Set Templating Engine
+// app.use(expressLayouts)
+// app.set('layout', './views/layouts/full-width')
 
+// app.set('views', './views')
+// app.use(express.urlencoded({extended: true}));
+app.set('view engine', 'ejs')
 /////////////////////////////////////
 // Setup Middleware
 /////////////////////////////////////
@@ -37,7 +47,7 @@ app.use(methodOverride("_method")); // Swap method of requests with _method quer
 app.use(express.static("public")); // serve the public folder as static
 app.use(morgan("tiny")); // Request Logging
 app.use(express.json()); // Parse json bodies
-app.use(express.urlencoded({ extended: false })); //parse bodies from form submissions
+app.use(express.urlencoded({ extended: true })); //parse bodies from form submissions
 // SESSION MIDDLEWARE REGISTRATION (adds req.session property)
 app.use(
   session({
@@ -61,6 +71,11 @@ app.use(
 
 //HomeRouter
 app.use("/", HomeRouter);
+app.use('/about', aboutRouter)
+app.use('/project', projectRouter)
+app.use('/services', servicesRouter)
+app.use('/contact', contactRouter)
+
 
 /////////////////////////////////////
 // App Listener

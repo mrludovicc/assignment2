@@ -80,6 +80,6 @@ app.use('/contact', contactRouter)
 /////////////////////////////////////
 // App Listener
 /////////////////////////////////////
-app.listen(PORT, () =>
+app.listen(process.env.PORT || "2021", () =>
   log.white("🚀 Server Launch 🚀", `Listening on Port ${PORT}`)
 );

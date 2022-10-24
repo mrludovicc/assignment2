@@ -49,6 +49,7 @@ app.use(morgan("tiny")); // Request Logging
 app.use(express.json()); // Parse json bodies
 app.use(express.urlencoded({ extended: true })); //parse bodies from form submissions
 // SESSION MIDDLEWARE REGISTRATION (adds req.session property)
+const CONN=`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ba4m2tv.mongodb.net/?retryWrites=true&w=majority`
 app.use(
   session({
     secret: SECRET,
@@ -58,7 +59,7 @@ app.use(
     saveUninitialized: true, // create session regardless of changes
     resave: true, //save regardless of changes
     store: new connect({
-      uri: process.env.MONGODB_URL,
+      uri: CONN,
       databaseName: "sessions",
       collection: "sessions",
     }),
@@ -80,6 +81,6 @@ app.use('/contact', contactRouter)
 /////////////////////////////////////
 // App Listener
 /////////////////////////////////////
-app.listen(process.env.PORT || "2021", () =>
+app.listen(PORT, () =>
   log.white("🚀 Server Launch 🚀", `Listening on Port ${PORT}`)
 );
